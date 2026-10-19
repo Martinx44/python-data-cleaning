@@ -1,39 +1,209 @@
-# movies-python-data-cleaning
-Movie Data Analysis 🎬
-This project is all about diving into a dataset of movies to see how different factors like budget, ratings, and more relate to a movie's success. We use Python libraries like Pandas, NumPy, Matplotlib, and Seaborn for the analysis.
+# Movie Industry Data Analysis Using Python
 
-#What's Inside
-Dataset: Info on movies like title, rating, genre, budget, gross revenue, and more.
-Analysis: We explore correlations, check out data distributions, spot outliers, and see how different features relate.
-Visuals: Plenty of plots and charts to make the data easier to digest.
+## Project Overview
 
-#Getting Started
-Clone the repo:
+This project explores a movie industry dataset using Python to investigate relationships between movie budgets, gross earnings, audience ratings, vote counts, genres, and production companies.
 
-#bash
-Copy code
-git clone https://github.com/yourusername/moviedata-analysis.git
-Install the necessary Python packages:
+The objective is to identify patterns in movie financial performance, examine relationships between numerical variables, and investigate which production companies have accumulated the highest total gross earnings in the dataset.
 
-#bash
-Copy code
-pip install -r requirements.txt
-Run the analysis by opening the Jupyter notebook or running the Python script:
+The project applies exploratory data analysis (EDA), statistical correlation, data quality assessment, and data visualization to extract insights from historical movie data.
 
-bash
-Copy code
-jupyter notebook MovieDataAnalysis.ipynb
-or
+### Objectives
 
-bash
-Copy code
-python MovieDataAnalysis.py
-Key Takeaways
-Budget vs. Gross: There's a strong link between how much is spent on a movie and how much it earns.
-Ratings and Genres: Certain ratings and genres tend to have higher gross revenue.
-Top Movies: We also look at which companies are behind the big earners.
-Contributing
-Got ideas or found something off? Feel free to open an issue or submit a pull request.
+- Inspect the structure and quality of the movie dataset.
+- Identify missing values and examine data types.
+- Investigate potential duplicate records.
+- Explore the relationship between movie budgets and gross earnings.
+- Examine correlations between numerical movie attributes.
+- Identify production companies with the highest aggregate gross earnings.
+- Visualize distributions, relationships, and potential outliers.
+- Explore categorical variables and their relationships with movie performance.
+
+### Tools and Technologies
+
+- Programming language: Python
+- Data manipulation: pandas, NumPy
+- Data visualization: Matplotlib, Seaborn
+- Statistical analysis: Pearson correlation and regression plots
+- Environment: Jupyter Notebook
+- Data source: CSV file
+
+### Dataset Description
+
+The project uses a movie dataset containing 7,669 records and 15 original columns in the displayed output, covering movies released across several decades.
+
+The dataset includes the following fields:
+
+Column| Description
+"name"| Movie title
+"rating"| Movie content classification
+"genre"| Movie genre
+"year"| Recorded release year
+"released"| Release date and country information
+"score"| Movie rating score
+"votes"| Number of recorded votes
+"director"| Movie director
+"writer"| Movie writer
+"star"| Principal star associated with the movie
+"country"| Country associated with the movie
+"budget"| Recorded movie production budget
+"gross"| Recorded gross earnings
+"company"| Production company
+"runtime"| Movie runtime
+
+Note: The dataset contains missing values, and the precise currency and accounting basis for the financial fields should be verified before making comparisons across countries or years.
+
+### Project Workflow
+
+1. Data Loading and Preparation
+
+Imported the dataset into a pandas DataFrame and inspected the first few records to understand its structure and contents.
+
+Libraries used include pandas, NumPy, Matplotlib, and Seaborn.
+
+Techniques: "pd.read_csv()", ".head()", DataFrame inspection.
+
+2. Missing-Value Analysis
+
+Calculated the percentage of missing values in each column.
+
+The initial inspection identified approximately:
+
+Column| Missing values
+"rating"| 1%
+"budget"| 28%
+"gross"| 2%
+
+The remaining columns displayed approximately 0% missing values when percentages were rounded to whole numbers.
+
+The missing budget values are particularly relevant because they affect the number of movies available for budget-versus-revenue analysis.
+
+3. Data Type Inspection
+
+Examined column data types to distinguish numerical variables from text-based and categorical fields.
+
+The numerical variables included "year", "score", "votes", "budget", "gross", and "runtime". Several descriptive fields, including movie titles, genres, directors, and production companies, were stored as objects.
+
+This inspection established which variables could be used directly in numerical analysis and which required additional preprocessing.
+
+4. Duplicate-Record Inspection
+
+Applied pandas "drop_duplicates()" to examine duplicate records.
+
+The displayed result still contained the full dataset, so the notebook should explicitly compare row counts before and after duplicate removal to determine whether any records were actually removed.
+
+Technique: "DataFrame.drop_duplicates()".
+
+5. Sorting Movies by Gross Earnings
+
+Sorted the dataset by "gross" in descending order to identify movies with the highest recorded gross earnings.
+
+The displayed results placed Avatar, Avengers: Endgame, and Titanic among the highest-grossing movies in the dataset.
+
+Techniques: "sort_values()", descending sort order.
+
+6. Outlier Analysis
+
+Used a box plot to examine the distribution of movie gross earnings and identify potential extreme values.
+
+Because gross earnings are highly unevenly distributed, a small number of blockbuster movies can dominate the scale of the visualization.
+
+A scatter plot was also used to explore the relationship between movie budgets and gross earnings.
+
+Techniques: Seaborn box plots, Matplotlib scatter plots.
+
+7. Correlation Analysis
+
+Calculated a Pearson correlation matrix for the numerical variables and visualized the results using a heatmap.
+
+The displayed correlation results showed several notable relationships:
+
+Variable pair| Pearson correlation| Interpretation
+Budget and gross earnings| 0.740| Strong positive linear association
+Votes and gross earnings| 0.631| Moderate-to-strong positive association
+Budget and votes| 0.442| Moderate positive association
+Score and votes| 0.409| Moderate positive association
+Score and gross earnings| 0.186| Weak positive linear association
+
+These results suggest that movies with larger recorded budgets tend to have higher gross earnings in this dataset. Movies with more votes also tend to have higher gross earnings.
+
+However, correlation does not establish causation. These relationships may be influenced by release year, distribution reach, franchise popularity, genre, and other factors.
+
+8. Regression and Relationship Visualization
+
+Created regression plots to examine the relationships between:
+
+- Movie budget and gross earnings.
+- Movie score and gross earnings.
+
+These visualizations help assess the direction and general strength of relationships between variables.
+
+9. Production Company Revenue Analysis
+
+Grouped movies by production company and summed their recorded gross earnings to identify the companies with the highest aggregate gross totals.
+
+The top five companies in the displayed results were:
+
+Rank| Production company| Aggregate gross earnings
+1| Warner Bros.| 56.49 billion
+2| Universal Pictures| 52.51 billion
+3| Columbia Pictures| 43.01 billion
+4| Paramount Pictures| 40.49 billion
+5| Twentieth Century Fox| 40.26 billion
+
+These figures represent the sums recorded in the dataset, not inflation-adjusted earnings or necessarily comparable lifetime totals for every company's entire film catalogue.
+
+10. Categorical Data Encoding
+
+Converted text-based columns into categorical codes to create a numerically encoded version of the dataset.
+
+This was used to explore correlations across encoded columns.
+
+However, assigning integer codes to nominal categories such as movie titles, directors, and production companies does not create meaningful numerical distances between those categories. Consequently, correlations involving arbitrary category codes should not be interpreted as substantive relationships.
+
+For stronger statistical analysis, correlation calculations should prioritize appropriate numerical variables or use statistical methods designed for categorical data.
+
+### Key Findings
+
+Based on the displayed results:
+
+- Budget and gross earnings: A Pearson correlation of approximately 0.74 indicates a strong positive linear association in the observed data.
+- Audience engagement: Vote counts have a positive association with gross earnings, with a reported correlation of approximately 0.63.
+- Audience scores: The relationship between movie scores and gross earnings is comparatively weak, with a reported correlation of approximately 0.19.
+- Production company performance: Warner Bros. has the highest aggregate gross earnings among the companies displayed in the analysis.
+- Data completeness: Budget data has a substantial missing-value rate, which should be considered when interpreting financial relationships.
+- Revenue distribution: The presence of very high-grossing movies creates extreme values that can influence summary statistics and visualizations.
+
+These are descriptive findings from the supplied notebook output and should not be interpreted as causal conclusions.
+
+### Skills Demonstrated
+
+- Python programming
+- Exploratory data analysis
+- Data quality assessment
+- Missing-value analysis
+- DataFrame manipulation with pandas
+- Numerical analysis with NumPy
+- Statistical correlation
+- Data visualization with Matplotlib and Seaborn
+- Regression plot interpretation
+- Outlier exploration
+- Grouping and aggregation
+- Categorical data preprocessing
+
+### Conclusion
+
+This project demonstrates how Python can be used to explore a movie dataset, investigate financial performance, and visualize relationships between production budgets, audience engagement, ratings, and gross earnings.
+
+The findings highlight the positive association between movie budgets and gross earnings, the relationship between vote counts and commercial performance, and the concentration of aggregate gross earnings among major production companies.
+
+Further analysis could improve the project by addressing missing values, validating financial units, accounting for inflation, and investigating whether budget and other movie characteristics can predict gross earnings.
+
+Author
+
+### Martin Agu
+
+Aspiring Data Analyst | Python | SQL | pandas | Exploratory Data Analysis | Data Visualization
 
 
 
